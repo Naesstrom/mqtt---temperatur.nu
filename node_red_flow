@@ -1,1 +1,121 @@
-[{"id":"dec304f8.aa61b8","type":"tab","label":"Temperatur.nu","disabled":false,"info":""},{"id":"67fb26e0.295868","type":"mqtt in","z":"dec304f8.aa61b8","name":"greenhouse:temp","topic":"/greenhouse/DHT22/Temperature","qos":"0","broker":"b4900578.721178","x":521.0195846557617,"y":358.00390625,"wires":[["feac8a43.c05128"]]},{"id":"feac8a43.c05128","type":"function","z":"dec304f8.aa61b8","name":"MQTT to Temperatur.nu","func":"var tokens = msg.topic.split(\"/\");\nvar dest = tokens[tokens.length-1];\nmsg.url =\"http://www.temperatur.nu/rapportera.php?hash=XXXXXXXXXXX&t=\";\nmsg.payload;\nreturn msg;","outputs":1,"noerr":0,"x":786.90234375,"y":357.886775970459,"wires":[["b74df439.ae3568","a7506fd6.3c0af"]]},{"id":"a7506fd6.3c0af","type":"http request","z":"dec304f8.aa61b8","name":"","method":"POST","ret":"txt","url":"http://www.temperatur.nu/rapportera.php?hash=XXXXXXXX&t={{{msg.payload}}}","tls":"","x":1051.9180908203125,"y":337.7930603027344,"wires":[["641b19eb.d389e8"]]},{"id":"641b19eb.d389e8","type":"debug","z":"dec304f8.aa61b8","name":"after http","active":true,"console":"false","complete":"true","x":1263.910327911377,"y":334.66021251678467,"wires":[]},{"id":"b74df439.ae3568","type":"debug","z":"dec304f8.aa61b8","name":"before http","active":true,"console":"false","complete":"payload","x":1052.8984832763672,"y":399.6523790359497,"wires":[]},{"id":"1d14c89e.e91197","type":"comment","z":"dec304f8.aa61b8","name":"input","info":"input format; devicename/sensorname/measurement/value\nexample: /climate/DHT22/Temperature/3.5","x":520.765625,"y":292.34765625,"wires":[]},{"id":"9cde77a2.dfdaf8","type":"comment","z":"dec304f8.aa61b8","name":"function","info":"Split everything up by each / in the input string to get only the value reported.","x":767.7578125,"y":295.3359375,"wires":[]},{"id":"b4900578.721178","type":"mqtt-broker","z":"","broker":"127.0.0.1","port":"1883","clientid":"","usetls":false,"compatmode":true,"keepalive":"60","cleansession":true,"willTopic":"","willQos":"0","willPayload":"","birthTopic":"","birthQos":"0","birthPayload":""}]
+[
+    {
+        "id": "dec304f8.aa61b8",
+        "type": "tab",
+        "label": "Temperatur.nu",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "67fb26e0.295868",
+        "type": "mqtt in",
+        "z": "dec304f8.aa61b8",
+        "name": "greenhouse:temp",
+        "topic": "/greenhouse/DHT22/Temperature",
+        "qos": "0",
+        "broker": "b4900578.721178",
+        "x": 521.0195846557617,
+        "y": 358.00390625,
+        "wires": [
+            [
+                "feac8a43.c05128"
+            ]
+        ]
+    },
+    {
+        "id": "feac8a43.c05128",
+        "type": "function",
+        "z": "dec304f8.aa61b8",
+        "name": "MQTT to Temperatur.nu",
+        "func": "var tokens = msg.topic.split(\"/\");\nvar dest = tokens[tokens.length-1];\nmsg.url =\"http://www.temperatur.nu/rapportera.php?hash=XXXXXXXXXXX&t=\";\nmsg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 786.90234375,
+        "y": 357.886775970459,
+        "wires": [
+            [
+                "b74df439.ae3568",
+                "a7506fd6.3c0af"
+            ]
+        ]
+    },
+    {
+        "id": "a7506fd6.3c0af",
+        "type": "http request",
+        "z": "dec304f8.aa61b8",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "http://www.temperatur.nu/rapportera.php?hash=XXXXXXXX&t={{{msg.payload}}}",
+        "tls": "",
+        "x": 1051.9180908203125,
+        "y": 337.7930603027344,
+        "wires": [
+            [
+                "641b19eb.d389e8"
+            ]
+        ]
+    },
+    {
+        "id": "641b19eb.d389e8",
+        "type": "debug",
+        "z": "dec304f8.aa61b8",
+        "name": "after http",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1263.910327911377,
+        "y": 334.66021251678467,
+        "wires": []
+    },
+    {
+        "id": "b74df439.ae3568",
+        "type": "debug",
+        "z": "dec304f8.aa61b8",
+        "name": "before http",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 1052.8984832763672,
+        "y": 399.6523790359497,
+        "wires": []
+    },
+    {
+        "id": "1d14c89e.e91197",
+        "type": "comment",
+        "z": "dec304f8.aa61b8",
+        "name": "input",
+        "info": "input format; devicename/sensorname/measurement/value\nexample: /climate/DHT22/Temperature/3.5",
+        "x": 520.765625,
+        "y": 292.34765625,
+        "wires": []
+    },
+    {
+        "id": "9cde77a2.dfdaf8",
+        "type": "comment",
+        "z": "dec304f8.aa61b8",
+        "name": "function",
+        "info": "Split everything up by each / in the input string to get only the value reported.",
+        "x": 767.7578125,
+        "y": 295.3359375,
+        "wires": []
+    },
+    {
+        "id": "b4900578.721178",
+        "type": "mqtt-broker",
+        "z": "",
+        "broker": "127.0.0.1",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": ""
+    }
+]
