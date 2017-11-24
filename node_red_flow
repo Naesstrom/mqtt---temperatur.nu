@@ -14,8 +14,8 @@
         "topic": "/greenhouse/DHT22/Temperature",
         "qos": "0",
         "broker": "b4900578.721178",
-        "x": 521.0195846557617,
-        "y": 358.00390625,
+        "x": 547.173469543457,
+        "y": 358.773154258728,
         "wires": [
             [
                 "feac8a43.c05128"
@@ -27,7 +27,7 @@
         "type": "function",
         "z": "dec304f8.aa61b8",
         "name": "MQTT to Temperatur.nu",
-        "func": "var tokens = msg.topic.split(\"/\");\nvar dest = tokens[tokens.length-1];\nmsg.url =\"http://www.temperatur.nu/rapportera.php?hash=XXXXXXXXXXX&t=\";\nmsg.payload;\nreturn msg;",
+        "func": "var tokens = msg.topic.split(\"/\");\nvar dest = tokens[tokens.length-1];\nmsg.url =\"http://www.temperatur.nu/rapportera.php?hash=xxxxxxxxxxxxxxxxxxxxxxxxxx&t=\" + msg.payload;\nmsg.payload;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "x": 786.90234375,
@@ -43,30 +43,18 @@
         "id": "a7506fd6.3c0af",
         "type": "http request",
         "z": "dec304f8.aa61b8",
-        "name": "",
+        "name": "HTTP POST",
         "method": "POST",
         "ret": "txt",
-        "url": "http://www.temperatur.nu/rapportera.php?hash=XXXXXXXX&t={{{msg.payload}}}",
+        "url": "",
         "tls": "",
-        "x": 1051.9180908203125,
-        "y": 337.7930603027344,
+        "x": 1017.3027267456055,
+        "y": 320.1007823944092,
         "wires": [
             [
-                "641b19eb.d389e8"
+                "2ccb48c8.2a93d8"
             ]
         ]
-    },
-    {
-        "id": "641b19eb.d389e8",
-        "type": "debug",
-        "z": "dec304f8.aa61b8",
-        "name": "after http",
-        "active": true,
-        "console": "false",
-        "complete": "true",
-        "x": 1263.910327911377,
-        "y": 334.66021251678467,
-        "wires": []
     },
     {
         "id": "b74df439.ae3568",
@@ -76,8 +64,8 @@
         "active": true,
         "console": "false",
         "complete": "payload",
-        "x": 1052.8984832763672,
-        "y": 399.6523790359497,
+        "x": 1029.821533203125,
+        "y": 403.4985189437866,
         "wires": []
     },
     {
@@ -85,9 +73,9 @@
         "type": "comment",
         "z": "dec304f8.aa61b8",
         "name": "input",
-        "info": "input format; devicename/sensorname/measurement/value\nexample: /climate/DHT22/Temperature/3.5",
-        "x": 520.765625,
-        "y": 292.34765625,
+        "info": "input format; devicename/sensorname/measurement/value\nexample: /climate/DHT22/Temperature/3.5\n\nReplace server and topic with your own.",
+        "x": 516.7657165527344,
+        "y": 327.5015048980713,
         "wires": []
     },
     {
@@ -95,9 +83,21 @@
         "type": "comment",
         "z": "dec304f8.aa61b8",
         "name": "function",
-        "info": "Split everything up by each / in the input string to get only the value reported.",
-        "x": 767.7578125,
-        "y": 295.3359375,
+        "info": "Split everything up by each / in the input string to get only the value reported.\nReplace HASH in the url with your own from temperatur.nu\n",
+        "x": 726.3732109069824,
+        "y": 328.1051940917969,
+        "wires": []
+    },
+    {
+        "id": "2ccb48c8.2a93d8",
+        "type": "debug",
+        "z": "dec304f8.aa61b8",
+        "name": "",
+        "active": true,
+        "console": "false",
+        "complete": "payload",
+        "x": 1193.954475402832,
+        "y": 349.93095684051514,
         "wires": []
     },
     {
